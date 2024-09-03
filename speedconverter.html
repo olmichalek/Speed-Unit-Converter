@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* Basic reset */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        /* Styling for the h1 element */
+        h1 {
+            font-size: 2.5em; /* Larger font size */
+            color: #fff; /* White text color */
+            text-align: center; /* Center alignment */
+            padding: 20px; /* Padding around the text */
+            margin-bottom: 30px; /* Margin below the heading */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            background: linear-gradient(135deg, #3498db, #2ecc71); /* Gradient background */
+            border-radius: 10px; /* Rounded corners */
+            display: inline-block; /* Inline block for padding and margin to work properly */
+        }
+
+        /* Styling for input and select elements */
+        input[type="text"], select {
+            font-size: 1em; /* Consistent font size */
+            padding: 10px; /* Padding inside the elements */
+            margin: 10px 0; /* Margin above and below */
+            border: 1px solid #ccc; /* Light grey border */
+            border-radius: 5px; /* Rounded corners */
+            width: 200px; /* Fixed width */
+            box-sizing: border-box; /* Include padding and border in the element's total width and height */
+        }
+
+        /* Styling for the button */
+        button {
+            font-size: 1em; /* Consistent font size */
+            padding: 10px 20px; /* Padding inside the button */
+            margin: 10px 0; /* Margin above and below */
+            border: none; /* Remove default border */
+            border-radius: 5px; /* Rounded corners */
+            background-color: #3498db; /* Blue background color */
+            color: white; /* White text color */
+            cursor: pointer; /* Pointer cursor on hover */
+            transition: background-color 0.3s; /* Smooth transition for background color */
+        }
+
+        button:hover {
+            background-color: #2980b9; /* Darker blue on hover */
+        }
+
+        button:active {
+            background-color: #1c5980; /* Even darker blue on click */
+        }
+
+        /* Style the container for better layout */
+        .container {
+            width: 80%;
+            max-width: 600px;
+        }
+
+        #printValue {
+            font-size: 16px; 
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <h1>Speed Unit Converter</h1>
+    <b>Value of speed</b>
+    <input type="text" id="firstSpeed" class="text">
+    <select name="speed" id="firstDistance">
+        <option value="m">Meters</option>
+        <option value="km">Kilometers</option>
+        <option value="mil">Miles</option>
+    </select>
+    <select name="time" id="firstTime">
+        <option value="s">Seconds</option>
+        <option value="h">Hours</option>
+        </select><br><br>
+    <b>Convert to:</b>
+    <select name="speed2" id="secondDistance">
+        <option value="m">Meters</option>
+        <option value="km">Kilometers</option>
+        <option value="mil">Miles</option>
+        </select>
+    <select name="time2" id="secondTime">
+        <option value="s">Seconds</option>
+        <option value="h">Hours</option>
+    </select>
+
+    <button onclick="convertSpeed()">Calculate</button><button id="refreshButton">Clear</button>
+    <p id="printValue"></p>
+
+</body>
+<script>
+
+function convertSpeed() {
+    var firstSpeed = parseFloat(document.getElementById("firstSpeed").value); 
+    var firstDistance = document.getElementById("firstDistance").value;
+    var firstTime = document.getElementById("firstTime").value; 
+    var secondDistance = document.getElementById("secondDistance").value;
+    var secondTime = document.getElementById("secondTime").value;
+    var selected1 = firstDistance + "/" + firstTime; 
+    var selected2 = secondDistance + "/" + secondTime; 
+
+    if (selected1 === "m/s" && selected2 === "km/h") {
+    convertedSpeed = firstSpeed * 3.6; 
+} else if (selected1 === "km/h" && selected2 === "m/s") {
+    convertedSpeed = firstSpeed / 3.6; 
+} else if (selected1 === "mil/h" && selected2 === "km/h") {
+    convertedSpeed = firstSpeed * 1.60934; 
+} else if (selected1 === "km/h" && selected2 === "mil/h") {
+    convertedSpeed = firstSpeed / 1.60934; 
+} else if (selected1 === "m/s" && selected2 === "mil/s") {
+    convertedSpeed = firstSpeed / 1609.34; 
+} else if (selected1 === "mil/s" && selected2 === "m/s") {
+    convertedSpeed = firstSpeed * 1609.34; 
+} else if (selected1 === "m/s" && selected2 === "mil/h") {
+    convertedSpeed = firstSpeed * 2.23694; // m/s to mil/h
+} else if (selected1 === "mil/h" && selected2 === "m/s") {
+    convertedSpeed = firstSpeed / 2.23694; // mil/h to m/s
+} else if (selected1 === "m/h" && selected2 === "km/h") { 
+    convertedSpeed = firstSpeed / 1000; 
+} else if (selected1 === "km/h" && selected2 === "m/h") {
+    convertedSpeed = firstSpeed * 1000; 
+} else if (selected1 === "m/h" && selected2 === "m/s") {
+    convertedSpeed = firstSpeed / 3600; 
+} else if (selected1 === "m/s" && selected2 === "m/h") {
+    convertedSpeed = firstSpeed * 3600; 
+} else if (selected1 === "m/h" && selected2 === "mil/h") {
+    convertedSpeed = firstSpeed / 1609.34; 
+} else if (selected1 === "mil/h" && selected2 === "m/h") {
+    convertedSpeed = firstSpeed * 1609.34; 
+} else if (selected1 === "m/h" && selected2 === "mil/s") {
+    convertedSpeed = firstSpeed / 1609.34 / 3600; 
+} else if (selected1 === "mil/s" && selected2 === "m/h") {
+    convertedSpeed = firstSpeed * 1609.34 * 3600; 
+} else if (selected1 === "m/s" && selected2 === "km/s") {
+    convertedSpeed = firstSpeed / 1000; // m/s to km/s
+} else if (selected1 === "km/s" && selected2 === "m/s") {
+    convertedSpeed = firstSpeed * 1000; // km/s to m/s
+} else if (selected1 === "km/h" && selected2 === "km/s") {
+    convertedSpeed = firstSpeed / 3600; // km/h to km/s
+} else if (selected1 === "km/s" && selected2 === "km/h") {
+    convertedSpeed = firstSpeed * 3600; // km/s to km/h
+} else if (selected1 === "km/s" && selected2 === "mil/h") {
+    convertedSpeed = firstSpeed * 3600 / 1.60934; // km/s to mil/h
+} else if (selected1 === "mil/h" && selected2 === "km/s") {
+    convertedSpeed = firstSpeed * 1.60934 / 3600; // mil/h to km/s
+} else if (selected1 === "km/s" && selected2 === "mil/s") {
+    convertedSpeed = firstSpeed / 1.60934; // km/s to mil/s
+} else if (selected1 === "mil/s" && selected2 === "km/s") {
+    convertedSpeed = firstSpeed * 1.60934; // mil/s to km/s
+} else if (selected1 === "m/h" && selected2 === "km/s") {
+    convertedSpeed = firstSpeed / 3600000; // m/h to km/s
+} else if (selected1 === "km/s" && selected2 === "m/h") {
+    convertedSpeed = firstSpeed * 3600000; // km/s to m/h
+}
+else if (selected1 === selected2) {
+    convertedSpeed = firstSpeed; 
+}
+
+
+  
+    if (isNaN(firstSpeed)) {
+        document.getElementById("printValue").innerText = "You entered the wrong speed value, you must type a number";  
+    }
+    else {
+     document.getElementById("printValue").innerText = convertedSpeed.toFixed(3) + " " + selected2;  
+    }
+   
+}
+
+const refreshButton = document.getElementById('refreshButton');
+refreshButton.style.backgroundColor = "green"; 
+
+// Add a click event listener to the button
+refreshButton.addEventListener('click', function() {
+    // Refresh the page
+    location.reload();
+});
+
+</script>
+</html>
